@@ -1,4 +1,5 @@
 const music = require('../model/music');
+let node_uid = require('node-uid')
 
 const addmusic = async(req,res,next) => {
     const {music_name,singer_name,pic,isup} = req.body;
@@ -6,10 +7,12 @@ const addmusic = async(req,res,next) => {
         try {
             const data = await music.find(music_name);
             if(JSON.stringify(data) == "{}"){
-                await music.insert(music_name,singer_name,pic,isup)
+                let id = node_uid();
+                await music.insert(id,music_name,singer_name,pic,isup)
                 res.json({
                     code:1,
-                    message:'添加歌曲成功'
+                    message:'添加歌曲成功',
+                    id
                 })
             }else{
                 res.json({

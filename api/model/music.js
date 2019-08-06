@@ -1,12 +1,12 @@
 const db = require('../../db')
 
-let node_uid = require('node-uid')
+
 
 //插入数据
-const insert = (music_name,singer_name,pic,isup) => {
+const insert = (id,music_name,singer_name,pic,isup) => {
     return new Promise((resolve,reject) => {
         db.query('insert into song (id,music_name,singer_name,pic,isup) values (?,?,?,?,?)',[
-            node_uid(),music_name,singer_name,pic,isup
+            id,music_name,singer_name,pic,isup
         ],(error,res) => {
             if(!error){
                 resolve(res)
@@ -88,7 +88,7 @@ const deleteMusic = (id) => {
 //判断歌曲是否存在
 const querymusic = () => {
     return new Promise((resolve,reject) => {
-        db.query('select * from song where isup=? order by id',[
+        db.query('select * from song where isup=?',[
             1
         ],(error,res) => {
             if(!error){
