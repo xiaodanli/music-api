@@ -35,7 +35,7 @@ router.post('/addmusic',checkLogin,musicController.addmusic);
 //修改歌曲
 router.post('/updatemusic',checkLogin,musicController.updatemusic);
 //上架/下架歌曲
-router.post('/musicshelf',checkLogin,musicController.musicShelf);
+// router.post('/musicshelf',checkLogin,musicController.musicShelf);
 //删除歌曲
 router.get('/deletemusic',checkLogin,musicController.deletemusic);
 

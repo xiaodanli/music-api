@@ -33,22 +33,9 @@ const find = (music_name) => {
 }
 
 //修改歌曲
-const update = (id,music_name,singer_name) => {
+const update = (id,music_name,singer_name,pic,isup) => {
     return new Promise((resolve,reject) => {
-        db.query('update song set music_name=?,singer_name=? where id=?',[music_name,singer_name,id],
-        (error,res) => {
-            if(!error){
-                resolve(res)
-            }else{
-                reject(error)
-            }
-        })
-    })
-}
-//上架/下架歌曲
-const updateIsup = (id,isup) => {
-    return new Promise((resolve,reject) => {
-        db.query('update song set isup=? where id=?',[isup,id],
+        db.query('update song set music_name=?,singer_name=?,isup=?,pic=? where id=?',[music_name,singer_name,isup,pic,id],
         (error,res) => {
             if(!error){
                 resolve(res)
@@ -88,9 +75,7 @@ const deleteMusic = (id) => {
 //判断歌曲是否存在
 const querymusic = () => {
     return new Promise((resolve,reject) => {
-        db.query('select * from song where isup=?',[
-            1
-        ],(error,res) => {
+        db.query('select * from song',[],(error,res) => {
             if(!error){
                 resolve(res)
             }else{
@@ -104,7 +89,6 @@ module.exports = {
     insert,
     find,
     update,
-    updateIsup,
     updatePic,
     deleteMusic,
     querymusic

@@ -36,36 +36,13 @@ const addmusic = async(req,res,next) => {
         })
     }
 }
-const musicShelf = async(req,res,next) => {
-    const {id,isup} = req.body;
-    if(id && isup){
-        try {
-            await music.updateIsup(id,isup);
-            res.json({
-                code:1,
-                message:'歌曲上架/下架成功'
-            })
-                
-        }catch(e){
-            console.log(e)
-            res.json({
-                message:'歌曲上架/下架成功失败',
-                code:0
-            })
-        }
-    }else{
-        res.json({
-            message:'参数不完整',
-            code:0
-        })
-    }
-}
 
 const updatemusic = async(req,res,next) => {
-    const {id,music_name,singer_name} = req.body;
-    if(id && music_name && singer_name){
+    const {id,music_name,singer_name,pic,isup} = req.body;
+    console.log(req.body)
+    if(id && music_name && singer_name && pic && isup){
         try {
-            await music.update(id,music_name,singer_name);
+            await music.update(id,music_name,singer_name,pic,isup);
             res.json({
                 code:1,
                 message:'修改歌曲成功'
@@ -130,7 +107,6 @@ const queryMusic = async(req,res,next) => {
 }
 module.exports = {
     addmusic,
-    musicShelf,
     updatemusic,
     deletemusic,
     queryMusic
