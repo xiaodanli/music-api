@@ -1,6 +1,16 @@
 const user = require('../model/user');
 const jwt = require('jsonwebtoken');
 
+//获取用户信息
+const getInfo = (req,res) => {
+    res.json({
+        code:1,
+        data:{
+            username:req.info.username
+        }
+    })
+}
+
 //注册
 const register = async(req,res,next) => {
     const {username,password} = req.body;
@@ -71,5 +81,6 @@ const login = async (req,res,next) => {
 
 module.exports = {
     register,
-    login
+    login,
+    getInfo
 }

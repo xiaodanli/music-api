@@ -27,6 +27,8 @@ router.post('/registry',userController.register)
 //登录接口
 router.post('/login',userController.login)
 
+router.get('/userinfo',checkLogin,userController.getInfo);
+
 //上传图片
 router.post('/upload',upload.single('file'),baseController.upload);
 

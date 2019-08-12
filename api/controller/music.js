@@ -90,11 +90,14 @@ const deletemusic = async(req,res,next) => {
 const queryMusic = async(req,res,next) => {
    
     try {
-       const musics = await music.querymusic();
+        let {pagenum,limit} = req.query;
+        const total = await music.count();
+       const musics = await music.querymusic(pagenum,limit);
         res.json({
             code:1,
             message:'查询歌曲列表成功',
-            data:musics
+            data:musics,
+            total:Math.ceil(total[0]['count(id)']/limit)
         })
             
     }catch(e){

@@ -1,7 +1,5 @@
 const db = require('../../db')
 
-
-
 //插入数据
 const insert = (id,music_name,singer_name,pic,isup) => {
     return new Promise((resolve,reject) => {
@@ -72,10 +70,25 @@ const deleteMusic = (id) => {
     })
 
 }
-//判断歌曲是否存在
-const querymusic = () => {
+//查询歌曲
+const querymusic = (pagenum,limitNum) => {
+    let start = (pagenum-1)*limitNum;
+    console.log(start,limitNum);
     return new Promise((resolve,reject) => {
-        db.query('select * from song',[],(error,res) => {
+        db.query('select * from song limit ?,?',[start,limitNum*1],(error,res) => {
+            if(!error){
+                resolve(res)
+            }else{
+                reject(error)
+            }
+        })
+    })
+}
+
+//查询的所有条数
+const count = () => {
+    return new Promise((resolve,reject) => {
+        db.query('select count(id) from song',(error,res) => {
             if(!error){
                 resolve(res)
             }else{
@@ -91,5 +104,6 @@ module.exports = {
     update,
     updatePic,
     deleteMusic,
-    querymusic
+    querymusic,
+    count
 }
