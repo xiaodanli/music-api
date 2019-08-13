@@ -62,7 +62,7 @@ const login = async (req,res,next) => {
         }else{
             const token = jwt.sign({
                 ...data,
-                exp:(+new Date())+1
+                exp:(+new Date())+600000
             },'lixd')
             res.json({
                 code:1,
