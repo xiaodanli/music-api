@@ -13,6 +13,7 @@ const getInfo = (req,res) => {
 
 //注册
 const register = async(req,res,next) => {
+    console.log(req.body);
     const {username,password} = req.body;
     if(username && password){
         try {
@@ -49,6 +50,7 @@ const register = async(req,res,next) => {
 //登录
 const login = async (req,res,next) => {
     const {username,password} = req.body;
+    console.log(req.body);
     try {
         const data = await user.find(username,password);
         if(Object.keys(data).length <=0){

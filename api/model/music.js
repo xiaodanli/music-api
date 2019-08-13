@@ -3,8 +3,10 @@ const db = require('../../db')
 //插入数据
 const insert = (id,music_name,singer_name,pic,isup) => {
     return new Promise((resolve,reject) => {
-        db.query('insert into song (id,music_name,singer_name,pic,isup) values (?,?,?,?,?)',[
-            id,music_name,singer_name,pic,isup
+        let create_time = new Date();
+        console.log(create_time);
+        db.query('insert into song (id,music_name,singer_name,pic,isup,create_time) values (?,?,?,?,?,?)',[
+            id,music_name,singer_name,pic,isup,create_time
         ],(error,res) => {
             if(!error){
                 resolve(res)
@@ -75,7 +77,7 @@ const querymusic = (pagenum,limitNum) => {
     let start = (pagenum-1)*limitNum;
     console.log(start,limitNum);
     return new Promise((resolve,reject) => {
-        db.query('select * from song limit ?,?',[start,limitNum*1],(error,res) => {
+        db.query('select * from song order by create_time limit ?,?',[start,limitNum*1],(error,res) => {
             if(!error){
                 resolve(res)
             }else{

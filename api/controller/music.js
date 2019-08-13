@@ -97,7 +97,7 @@ const queryMusic = async(req,res,next) => {
             code:1,
             message:'查询歌曲列表成功',
             data:musics,
-            total:Math.ceil(total[0]['count(id)']/limit)
+            total:total[0]['count(id)']
         })
             
     }catch(e){
