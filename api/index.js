@@ -18,7 +18,6 @@ const userController = require('./controller/user');
 const baseController = require('./controller/base')
 const musicController = require('./controller/music')
 const checkLogin = require('./middleware/checkLogin');
-console.log("====")
 
 //用户相关的接口
 
@@ -44,4 +43,5 @@ router.get('/deletemusic',checkLogin,musicController.deletemusic);
 
 //歌曲列表
 router.get('/querymusic',checkLogin,musicController.queryMusic);
+
 module.exports = router;

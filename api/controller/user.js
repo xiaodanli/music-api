@@ -13,7 +13,6 @@ const getInfo = (req,res) => {
 
 //注册
 const register = async(req,res,next) => {
-    console.log(req.body);
     const {username,password} = req.body;
     if(username && password){
         try {
@@ -25,21 +24,20 @@ const register = async(req,res,next) => {
                     message:'注册成功'
                 })
             }else{
-                res.json({
+                res.status(422).json({
                     code:2,
                     message:'该用户已经注册'
                 })
             }
         }catch(e){
-            console.log(e)
-            res.json({
+            res.status(422).json({
                 name:'ValidateFail',
                 message:'注册失败',
                 code:0
             })
         }
     }else{
-        res.json({
+        res.status(422).json({
             name:'ValidateFail',
             message:'参数不完整',
             code:0
@@ -50,11 +48,10 @@ const register = async(req,res,next) => {
 //登录
 const login = async (req,res,next) => {
     const {username,password} = req.body;
-    console.log(req.body);
     try {
         const data = await user.find(username,password);
         if(Object.keys(data).length <=0){
-            res.json({
+            res.status(422).json({
                 code:0,
                 name:'ValidateFail',
                 message:'用户名密码错误'
@@ -72,7 +69,7 @@ const login = async (req,res,next) => {
         }
 
     }catch(e){
-        res.json({
+        res.status(422).json({
             code:0,
             name:'ValidateFail',
             message:'用户名密码错误'

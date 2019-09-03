@@ -15,7 +15,7 @@ module.exports = (req,res,next) => {
                     next()
                 }
             }else{
-                res.json({
+                res.status(401).json({
                     name:'Unauthorized',
                     message:'用户未登录',
                     code:0
@@ -23,7 +23,7 @@ module.exports = (req,res,next) => {
             }
         })
     }catch(e){
-        res.json({
+        res.status(401).json({
             name: 'Unauthorized',
             message: '用户未登录',
             code: 0

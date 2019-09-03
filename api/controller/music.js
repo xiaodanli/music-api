@@ -39,7 +39,6 @@ const addmusic = async(req,res,next) => {
 
 const updatemusic = async(req,res,next) => {
     const {id,music_name,singer_name,pic,isup} = req.body;
-    console.log(req.body)
     if(id && music_name && singer_name && pic && isup){
         try {
             await music.update(id,music_name,singer_name,pic,isup);
@@ -74,7 +73,6 @@ const deletemusic = async(req,res,next) => {
             })
                 
         }catch(e){
-            console.log(e)
             res.json({
                 message:'删除歌曲失败',
                 code:0
@@ -92,7 +90,7 @@ const queryMusic = async(req,res,next) => {
     try {
         let {pagenum,limit} = req.query;
         const total = await music.count();
-       const musics = await music.querymusic(pagenum,limit);
+        const musics = await music.querymusic(pagenum,limit);
         res.json({
             code:1,
             message:'查询歌曲列表成功',
@@ -101,7 +99,6 @@ const queryMusic = async(req,res,next) => {
         })
             
     }catch(e){
-        console.log(e)
         res.json({
             message:'查询歌曲列表失败',
             code:0

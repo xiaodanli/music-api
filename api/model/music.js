@@ -4,7 +4,6 @@ const db = require('../../db')
 const insert = (id,music_name,singer_name,pic,isup) => {
     return new Promise((resolve,reject) => {
         let create_time = new Date();
-        console.log(create_time);
         db.query('insert into song (id,music_name,singer_name,pic,isup,create_time) values (?,?,?,?,?,?)',[
             id,music_name,singer_name,pic,isup,create_time
         ],(error,res) => {
@@ -75,7 +74,6 @@ const deleteMusic = (id) => {
 //查询歌曲
 const querymusic = (pagenum,limitNum) => {
     let start = (pagenum-1)*limitNum;
-    console.log(start,limitNum);
     return new Promise((resolve,reject) => {
         db.query('select * from song order by create_time limit ?,?',[start,limitNum*1],(error,res) => {
             if(!error){
